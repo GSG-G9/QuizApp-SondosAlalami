@@ -14,16 +14,17 @@ body {
     
   }
 
-.home{
+#home{
     margin : auto;
     position: relative;
-    top: 20%;
+    top:10%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 60%;
     height: 50%;
     text-align: center;
+    background-color: rgb(136, 77, 121);
    
 }
 
@@ -91,4 +92,75 @@ h1{
     border-radius: 5px;
     background-color: rosybrown;
 }
+
+.quiz{
+ margin: auto;
+ display: flex;
+ background-color: teal;
+ height: 50%;
+ width: 40%;
+ flex-direction: column;
+ justify-content: space-around;
+ position: relative;
+ top: 15%;
+ 
+
+}
+.question{
+ flex: 0 0 100px;
+ color: thistle;
+
+}
+.answers-container{
+   
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 0 auto;
+}
+.answer{
+    flex : 50%;
+    background-color: thistle;
+    border: solid;
+    padding-top: 10px;
+    padding-left: 10px;
+   
+    
+  
+    
+}
+
+#hide{
+    display: none;
+    
+}
+
+
+
+#option1 #option2 #option3 #option4{
+    float: left;
+    padding-left: 20px; 
+   height: 100%;
+   width: 100%;
+   
+}
+
+#op1 #op2 #op3 #op4{
+   
+}
+
+input[type="radio"]:checked{
+    color:red;
+    background-color: red;
+    margin-left: 20px;
+}
+
+#next-question{
+ margin: auto;
+ height: 50px;
+ width: 100px;
+}
+
+
+
+
 
