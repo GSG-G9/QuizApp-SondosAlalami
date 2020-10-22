@@ -11,11 +11,11 @@
 
     <div id="home">
       <h1>Quiz Game</h1>
-      <p>Start the game and enter your name, choose one answer of 4 options to each question(only one right answer).</p>
+      <p id="description ">Start the game and enter your name, choose one answer of 4 options to each question(only one right answer).</p>
       <div class="board">
         <h2>Leader Board</h2>
         <p>High Score</p>
-        <p>value</p>
+        <p id="high-score">-</p>
 
       </div>
     
@@ -23,35 +23,32 @@
      
        <button id= "start-game" onclick="showNameBox()">Start Game</button>
        <div id= "name-box">
-        <input class="userName" type="text" placeholder="Enter your name, please">
-        <button type="submit" class="submit" onclick="removeHome()">submit</button>
+        <input id="user-name" type="text" placeholder="Enter your name, please">
+        <button type="submit" id="submit" onclick="removeHome()">submit</button>
        </div> 
       
     
     </div>
    
     <div class= "quiz" id="hide">
-       <p >current question </p>
+       <p >Qurrent Question </p>
        <p id="current-question">5/10 </p>
-       <p class="question">Question</p>
+       <p  class="question">Question</p>
       
 
     <div class="answers-container">
   
-   <!-- <button class="answer" id="op1"  >answer1</button>
-    <button class="answer" id="op2"  onclick="isChecked()">answer2</button>
-     <button class="answer" id="op3">answer3</button>
-     <button class="answer" id="op4"  >answer4</button>
-      -->
-
     <label class="answer"> <input id="option1" type="radio" name="choices" onclick="isChecked()"> <div id="op1"> answer1</div> </label>
     <label class="answer"> <input id="option2" type="radio" name="choices" onclick="isChecked()"> <div id="op2"> answer2</div></label>
     <label class="answer"> <input id="option3" type="radio" name="choices" onclick="isChecked()"> <div id="op3">  answer3</div></label>
     <label class="answer"> <input id="option4" type="radio" name="choices" onclick="isChecked()"> <div id="op4"> answer4</div></label>
     <button  id="next-question" onclick="CheckAnswer()" disabled>Next Question</button>
- </div>
-   </div>
+    <button  id="finish" onclick="finishGame()">Finish</button>
 
+   
+   </div>
+   </div>
+   <div id="result">Your Score is</div>
     <script src="script.js"></script>  
 </body>
 </html>
