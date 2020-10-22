@@ -1,3 +1,5 @@
+
+
 const nameBox= document.getElementById("name-box");
 
 const startGame= document.getElementById("start-game");
@@ -12,6 +14,8 @@ const option4=document.getElementById("op4");
 
 const answerr=document.getElementsByClassName("answer");
 
+const submit=document.getElementById("submit");
+
 
 const option44=document.getElementById("option4");
 
@@ -20,13 +24,36 @@ const inputList=document.getElementsByTagName("input");
 const nextQuestion= document.getElementById("next-question");
 const current=document.getElementById("current-question");
 
-let score=0, count=0, currentQuestion=1;
+const userName=document.getElementById("user-name");
+
+const finish=document.getElementById("finish");
+const result=document.getElementById("result");
+const high=document.getElementById("high-score")
 
 
-console.log(current);
+
+
+let score=0, count=0, currentQuestion=1, scores=[];
+
+
+
+for (i=0; i<localStorage.length; i++){
+    scores.push(localStorage.getItem(localStorage.key(i)));
+
+}
+
+console.log(scores);
+let highScore=Math.max(...scores);
+let index= scores.indexOf(`${highScore}`);
+let name= window.localStorage.key(index);
+console.log(index);
+
+if(localStorage.length){
+high.textContent= ` ${name} ${highScore}`;
+
 current.textContent= `${currentQuestion}/10`;
 
-
+}
 function showNameBox(){
     
         nameBox.style.display = "flex";
@@ -35,9 +62,13 @@ function showNameBox(){
 }
 
 function removeHome(){
+
+    if (userName.value===""){
+        alert("Enter your name, please");
+    }
+    else{
    home.style.display="none";
-   quizPage.removeAttribute("id", "hide");
-   
+   quizPage.removeAttribute("id", "hide");}
 
 }
 
@@ -117,17 +148,6 @@ let questionList= [
 
 
 
-
-console.log(question.textContent);
-console.log(option1);
-
-var random1 = Math.floor(Math.random() * questionList.length) ;
-var choice1 = questionList[random1];
-
-console.log(random1);
-console.log(choice1);
-
-
 var nums = [0,1,2,3,4,5,6,7,8,9],
     ranNums = [],
     i = nums.length,
@@ -147,67 +167,12 @@ option3.textContent= questionList[ranNums[0]]["3"];
 option4.textContent= questionList[ranNums[0]]["4"];
 
 
-let randomArray= [];
-
-for (i=0; i<10; i++){
-    var random=Math.floor(Math.random() * 10);
-    randomArray.push(random);
-}
-console.log(randomArray);
-
-
-console.log(ranNums);
-// questionList.splice(random1, 1);
-
-// var random2 = Math.floor(Math.random() * questionList.length) ;
-// var choice2 = questionList[random2];
-
-// console.log(random2);
-// console.log(choice2);
-
-
-// var coffee = document.forms[0];
-// var txt = "";
-// var i;
-// for (i = 0; i < coffee.length; i++) {
-//   if (coffee[i].checked) {
-//     txt = txt + coffee[i].textContent + " ";
-//     console.log(txt);
-//   }
-// }
-
-
-
-
-
-
-// for (i = 0; i < answerr.length; i++) {
-//       if (answerr[i].checked) {
-        
-//         console.log("done");
-//       }
-//     }
-
-// console.log(option44.checked);
-
-// console.log(option44.name);
-
-
-
-console.log(quizPage);
-
-console.log(option1);
-console.log(option2);
-
-
-
 
  function isChecked(){
 for (let i=0; i<inputList.length; i++){
-    let x=inputList[i].id;
-    let y=x.substr(x.length - 1);
+    
     if (inputList[i].type=="radio" && inputList[i].checked){
-        console.log(y);
+       
         nextQuestion.disabled= false;
     }
     
@@ -216,63 +181,52 @@ for (let i=0; i<inputList.length; i++){
 
 }
 
-// function isChecked(){
-//     for (let i=0; i<answerr.length; i++){
-//         if (this.clicked){
-//             console.log("done");
-//             nextQuestion.disabled= false;
-//         }
-        
-//     }
-//     console.log("hi");
-//     console.log(this.clicked);
-// }
 
 
-isChecked();
-console.log(answerr);
 
-function foo(){
-    console.log("foo");
-}
 
 function CheckAnswer(){
-    console.log("hiii");
     
-  
     for (let i=0; i<inputList.length; i++){
           let x=inputList[i].id;
-         let y=x.substr(x.length - 1);
+          let y=x.substr(x.length - 1);
          
         if (inputList[i].type=="radio" && inputList[i].checked ){
            if (y == questionList[ranNums[count]]["answer"]){
                 score++;
-                console.log(y);
+                
             }
         
         }
         
     }
     
-    console.log(questionList[ranNums[count]]["answer"]);
-
+   
     count++;
     currentQuestion++;
-    console.log(score);
-    console.log(current);
     current.textContent= `${currentQuestion}/10`;
-    
 
-   
+    question.textContent=  questionList[ranNums[count]].question;
+    option1.textContent= questionList[ranNums[count]]["1"];
+    option2.textContent= questionList[ranNums[count]]["2"];
+    option3.textContent= questionList[ranNums[count]]["3"];
+    option4.textContent= questionList[ranNums[count]]["4"];
 
-    // var random1 = Math.floor(Math.random() * questionList.length) ;
+     if (currentQuestion==10){
+        nextQuestion.style.display="none";
+        finish.style.display="block";
 
-    // console.log(random1);
-question.textContent=  questionList[ranNums[count]].question;
-option1.textContent= questionList[ranNums[count]]["1"];
-option2.textContent= questionList[ranNums[count]]["2"];
-option3.textContent= questionList[ranNums[count]]["3"];
-option4.textContent= questionList[ranNums[count]]["4"];
+    }
 
     
 }
+
+
+function finishGame(){
+    quizPage.setAttribute("id", "hide");
+    result.style.display="block";
+    result.textContent = `Your Score is ${score}`;
+    localStorage.setItem(`${userName.value}`, score);
+
+}
+
